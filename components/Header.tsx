@@ -15,6 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 import BookIcon from '@mui/icons-material/Book';
+import Link from "next/link";
 
 const pages = ['Home','Blog'];
 const settings = ['Profile', 'Logout'];
@@ -90,18 +91,38 @@ const Header = () => {
                                           }}
                                     >
                                           {pages.map((page) => (
-                                                <Box 
-                                                      sx={{ width: 250 , paddingTop: 3, fontSize: 14}}
-                                                      role="presentation"
-                                                >
-                                                      <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                                            <Typography>
+                                                <Link href={page === 'Blog' ? '/blog' : '/'}>
+                                                      <Box 
+                                                            sx={{ 
+                                                                  width: 250, 
+                                                                  paddingTop: 3, 
+                                                                  fontSize: 14,
+                                                                  my: 1, 
+                                                                  mx: 1, 
+                                                                  color: 'black',
+                                                                  fontWeight: 700,
+                                                                  fontFamily: 'Josefin Sans',
+                                                                  textDecorationLine: 'inherit',
+                                                            }}
+                                                            role="presentation"
+                                                      >
+                                                            <Button 
+                                                                  key={page} 
+                                                                  onClick={handleCloseNavMenu}
+                                                                  sx={{
+                                                                        color: '#76c9ac',
+                                                                        fontWeight: 700,
+                                                                        fontSize: 14,
+                                                                        fontFamily: 'Josefin Sans',
+                                                                  }}
+                                                            >
                                                                   {page === 'Home' ? 
                                                                         <HomeIcon sx={{marginRight: 2}} /> 
-                                                                        : <BookIcon sx={{marginRight: 2}}/>}{page}
-                                                            </Typography>
-                                                      </MenuItem>
-                                                </Box>
+                                                                        : <BookIcon sx={{marginRight: 2}}/>}
+                                                                  {page}
+                                                            </Button>
+                                                      </Box>
+                                                </Link>
                                           ))}
                                     </Drawer>
                               </Box>
@@ -125,21 +146,23 @@ const Header = () => {
                               </Typography>
                               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                     {pages.map((page) => (
-                                          <Button
-                                                key={page}
-                                                onClick={handleCloseNavMenu}
-                                                sx={{ 
-                                                      my: 1, 
-                                                      mx: 1, 
-                                                      color: 'white',
-                                                      fontWeight: 700,
-                                                      fontSize: 16,
-                                                      fontFamily: 'Josefin Sans',
-                                                }}
-                                                //endIcon={page === 'Blog' ? <KeyboardArrowDownIcon /> : null}
-                                          >     
-                                                {page}
-                                          </Button>
+                                          <Link href={page === 'Blog' ? '/blog' : '/'}>
+                                                <Button
+                                                      key={page}
+                                                      onClick={handleCloseNavMenu}
+                                                      sx={{ 
+                                                            my: 1, 
+                                                            mx: 1, 
+                                                            color: 'white',
+                                                            fontWeight: 700,
+                                                            fontSize: 16,
+                                                            fontFamily: 'Josefin Sans',
+                                                      }}
+                                                      //endIcon={page === 'Blog' ? <KeyboardArrowDownIcon /> : null}
+                                                >     
+                                                      {page}
+                                                </Button>
+                                          </Link>
                                     ))}
                               </Box>
                               <Box sx={{ flexGrow: 0 }}>
