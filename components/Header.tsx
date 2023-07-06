@@ -9,9 +9,12 @@ Menu,
 Container,
 Button,
 Tooltip,
-MenuItem } from "@mui/material";
+MenuItem,
+Drawer } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
+import HomeIcon from '@mui/icons-material/Home';
+import BookIcon from '@mui/icons-material/Book';
 
 const pages = ['Home','Blog'];
 const settings = ['Profile', 'Logout'];
@@ -67,18 +70,19 @@ const Header = () => {
                                     >
                                           <MenuIcon />
                                     </IconButton>
-                                    <Menu
+                                    <Drawer
                                           id="menu-appbar"
-                                          anchorEl={anchorElNav}
-                                          anchorOrigin={{
-                                                vertical: 'bottom',
-                                                horizontal: 'left',
-                                          }}
+                                          anchor="left"
+                                          //anchorEl={anchorElNav}
+                                          // anchorOrigin={{
+                                          //       vertical: 'bottom',
+                                          //       horizontal: 'left',
+                                          // }}
                                           keepMounted
-                                          transformOrigin={{
-                                                vertical: 'top',
-                                                horizontal: 'left',
-                                          }}
+                                          // transformOrigin={{
+                                          //       vertical: 'top',
+                                          //       horizontal: 'left',
+                                          // }}
                                           open={Boolean(anchorElNav)}
                                           onClose={handleCloseNavMenu}
                                           sx={{
@@ -86,11 +90,20 @@ const Header = () => {
                                           }}
                                     >
                                           {pages.map((page) => (
-                                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                                      <Typography textAlign="center">{page}</Typography>
-                                                </MenuItem>
+                                                <Box 
+                                                      sx={{ width: 250 , paddingTop: 3, fontSize: 14}}
+                                                      role="presentation"
+                                                >
+                                                      <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                                            <Typography>
+                                                                  {page === 'Home' ? 
+                                                                        <HomeIcon sx={{marginRight: 2}} /> 
+                                                                        : <BookIcon sx={{marginRight: 2}}/>}{page}
+                                                            </Typography>
+                                                      </MenuItem>
+                                                </Box>
                                           ))}
-                                    </Menu>
+                                    </Drawer>
                               </Box>
                               <Typography
                                     variant="h5"
@@ -116,15 +129,15 @@ const Header = () => {
                                                 key={page}
                                                 onClick={handleCloseNavMenu}
                                                 sx={{ 
-                                                      my: 3, 
+                                                      my: 1, 
                                                       mx: 1, 
-                                                      color: 'white', 
-                                                      display: 'block', 
+                                                      color: 'white',
                                                       fontWeight: 700,
                                                       fontSize: 16,
-                                                      fontFamily: 'Josefin Sans'
+                                                      fontFamily: 'Josefin Sans',
                                                 }}
-                                          >
+                                                //endIcon={page === 'Blog' ? <KeyboardArrowDownIcon /> : null}
+                                          >     
                                                 {page}
                                           </Button>
                                     ))}
